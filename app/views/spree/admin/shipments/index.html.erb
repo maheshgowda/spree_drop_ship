@@ -36,7 +36,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= label_tag nil, Spree.t(:status) %><br/>
-          <%= f.select :state, Spree::Shipment.state_machines[:state].states.collect {|s| [Spree.t("shipment_state.#{s.name}"), s.value]}, {:include_blank => true}, :class => 'select2' %>
+          <%= f.select :state_eq, Spree::Shipment.state_machines[:state].states.collect {|s| [Spree.t("shipment_state.#{s.name}"), s.value]}, {:include_blank => true}, :class => 'select2' %>
         </div>
       </div>
       </div>

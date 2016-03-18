@@ -9,6 +9,9 @@ class CreateSuppliers < ActiveRecord::Migration
       t.string     :email
       t.string     :name
       t.string     :url
+      t.string :link
+      t.attachment :image
+      t.integer :position
       t.datetime   :deleted_at
       t.timestamps
     end
