@@ -4,16 +4,6 @@ class Spree::Supplier < Spree::Base
 
   attr_accessor :password, :password_confirmation
   
-  validates_presence_of :link
-  validates_presence_of :image
-
-
-  # Paperclip configuration
-  has_attached_file :image, 
-     styles: {mini: '48x48#'}
-     
-  validates_attachment :image,
-    content_type: { content_type: ["image/png"] }
   #==========================================
   # Associations
 
