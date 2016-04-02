@@ -7,6 +7,8 @@ module Spree
 
         let(:supplier_1) { create(:supplier) }
         let(:supplier_2) { create(:supplier) }
+		let(:artist_1) { create(:artist) }
+        let(:artist_2) { create(:artist) }
 
         let(:variant_1) {
           v = create(:variant)
@@ -16,6 +18,16 @@ module Spree
           v.reload.supplier_variants.find_by_supplier_id(supplier_2.id).update_column(:cost, 6)
           v
         }
+		
+		let(:variant_1) {
+          v = create(:variant)
+          v.product.add_artist! artist_1
+          v.reload.artist_variants.find_by_artist_id(artist_1.id).update_column(:cost, 5)
+          v.product.add_artist! artist_2
+          v.reload.artist_variants.find_by_artist_id(artist_2.id).update_column(:cost, 6)
+          v
+        }
+		
         let(:variant_2) {
           v = create(:variant)
           v.product.add_supplier! supplier_1
@@ -24,12 +36,30 @@ module Spree
           v.reload.supplier_variants.find_by_supplier_id(supplier_2.id).update_column(:cost, 4)
           v
         }
+		
+		 let(:variant_2) {
+          v = create(:variant)
+          v.product.add_artist! artist_1
+          v.reload.artist_variants.find_by_artist_id(artist_1.id).update_column(:cost, 5)
+          v.product.add_artist! artist_2
+          v.reload.artist_variants.find_by_artist_id(artist_2.id).update_column(:cost, 4)
+          v
+        }
+		
         let(:variant_3) {
           v = create(:variant)
           v.product.add_supplier! supplier_1
           v.product.add_supplier! supplier_2
           v.reload
         }
+		
+		  let(:variant_3) {
+          v = create(:variant)
+          v.product.add_artist! artist_1
+          v.product.add_artist! artist_2
+          v.reload
+        }
+		
         let(:variant_4) { create(:variant) }
 
         let(:variants){

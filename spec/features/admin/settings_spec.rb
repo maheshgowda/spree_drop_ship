@@ -29,5 +29,22 @@ describe 'Admin - DropShip Settings', js: true do
     find_field('default_commission_percentage').value.to_f.should eql(10.0)
     expect(page).to have_content('Drop ship settings successfully updated.')
   end
+  
+  
+  it 'should be able to be updated' do
+    # Change settings
+    uncheck 'send_artist_email'
+    fill_in 'default_commission_flat_rate', with: 0.30
+    fill_in 'default_commission_percentage', with: 10
+    click_button 'Update'
+    expect(page).to have_content('Drop ship settings successfully updated.')
+
+    # Verify update saved properly by reversing checkboxes or checking field values.
+    check 'send_artist_email'
+    click_button 'Update'
+    find_field('default_commission_flat_rate').value.to_f.should eql(0.3)
+    find_field('default_commission_percentage').value.to_f.should eql(10.0)
+    expect(page).to have_content('Drop ship settings successfully updated.')
+  end
 
 end

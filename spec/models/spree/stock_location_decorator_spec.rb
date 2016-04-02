@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Spree::StockLocation do
 
   it { should belong_to(:supplier) }
+  
+  it { should belong_to(:artist) }
 
   subject { create(:stock_location, backorderable_default: true) }
 
@@ -25,6 +27,11 @@ describe Spree::StockLocation do
 
     context 'does not propagate for non supplier variants' do
       before { subject.supplier_id = create(:supplier).id }
+      it { stock_item.should be_nil }
+    end
+	
+	 context 'does not propagate for non artist variants' do
+      before { subject.artist_id = create(:artist).id }
       it { stock_item.should be_nil }
     end
 

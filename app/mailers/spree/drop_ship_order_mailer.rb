@@ -8,6 +8,5 @@ module Spree
       @supplier = @shipment.supplier
       mail to: @supplier.email, subject: Spree.t('drop_ship_order_mailer.supplier_order.subject', name: Spree::Store.current.name, number: @shipment.number)
     end
-
   end
 end

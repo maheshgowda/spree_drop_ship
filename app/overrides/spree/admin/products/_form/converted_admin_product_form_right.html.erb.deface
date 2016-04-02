@@ -3,3 +3,7 @@
 <% if can? :manage, Spree::Supplier %>
   <!-- TODO allow assignment to variants -->
 <% end %>
+
+<% if can? :manage, Spree::Artist %>
+  <!-- TODO allow assignment to variants -->
+<% end %>

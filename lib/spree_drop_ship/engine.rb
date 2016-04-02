@@ -24,6 +24,7 @@ module SpreeDropShip
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
       Spree::Ability.register_ability(Spree::SupplierAbility)
+      Spree::Ability.register_ability(Spree::ArtistAbility)
     end
 
     config.to_prepare &method(:activate).to_proc

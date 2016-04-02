@@ -17,6 +17,21 @@ describe Spree::Shipment do
 
       expect(subject.class.by_supplier(supplier.id)).to match_array([shipment_2, shipment_4, shipment_6])
     end
+	
+	
+	it '#by_artist' do
+      artist = create(:artist)
+      stock_location_1 = artist.stock_locations.first
+      stock_location_2 = create(:stock_location, artist: artist)
+      shipment_1 = create(:shipment)
+      shipment_2 = create(:shipment, stock_location: stock_location_1)
+      shipment_3 = create(:shipment)
+      shipment_4 = create(:shipment, stock_location: stock_location_2)
+      shipment_5 = create(:shipment)
+      shipment_6 = create(:shipment, stock_location: stock_location_1)
+
+      expect(subject.class.by_supplier(artist.id)).to match_array([shipment_2, shipment_4, shipment_6])
+    end
 
   end
 
@@ -36,6 +51,16 @@ describe Spree::Shipment do
       expect(shipment.reload.supplier_commission.to_f).to eql(1.5)
     end
 
+	it 'should track commission for shipment' do
+      artist = create(:artist_with_commission)
+      shipment = create(:shipment, stock_location: artist.stock_locations.first)
+
+      expect(shipment.artist_commission.to_f).to eql(0.0)
+      shipment.stub final_price_with_items: 10.0
+      shipment.send(:after_ship)
+      expect(shipment.reload.artist_commission.to_f).to eql(1.5)
+    end
+	
   end
 
   it '#final_price_with_items' do

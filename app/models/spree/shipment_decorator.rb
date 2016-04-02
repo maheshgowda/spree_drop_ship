@@ -5,9 +5,13 @@ Spree::Shipment.class_eval do
   has_many :payments, as: :payable
 
   scope :by_supplier, -> (supplier_id) { joins(:stock_location).where(spree_stock_locations: { supplier_id: supplier_id }) }
-
+  
+  scope :by_artist, -> (artist_id) { joins(:stock_location).where(spree_stock_locations: { artist_id: artist_id }) }
+  
   delegate :supplier, to: :stock_location
-
+  
+  delegate :artist, to: :stock_location
+  
   def display_final_price_with_items
     Spree::Money.new final_price_with_items
   end
@@ -20,7 +24,11 @@ Spree::Shipment.class_eval do
   def supplier_commission_total
     ((self.final_price_with_items * self.supplier.commission_percentage / 100) + self.supplier.commission_flat_rate)
   end
-
+  
+  def artist_commission_total
+    ((self.final_price_with_items * self.artist.commission_percentage / 100) + self.artist.commission_flat_rate)
+  end
+  
   private
 
   durably_decorate :after_ship, mode: 'soft', sha: 'e8eca7f8a50ad871f5753faae938d4d01c01593d' do
@@ -29,10 +37,15 @@ Spree::Shipment.class_eval do
     if supplier.present?
       update_commission
     end
+    
+    if artist.present?
+      update_commission
+    end
   end
 
   def update_commission
     update_column :supplier_commission, self.supplier_commission_total
+    update_column :artist_commission, self.artist_commission_total
   end
 
 end

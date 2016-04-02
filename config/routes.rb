@@ -4,7 +4,7 @@ Spree::Core::Engine.add_routes do
     resource :drop_ship_settings
     resources :shipments
     resources :suppliers
-    
+    resources :artists
   end
 end
 

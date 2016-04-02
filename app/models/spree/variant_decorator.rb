@@ -2,9 +2,16 @@ module Spree
   Variant.class_eval do
 
     has_many :suppliers, through: :supplier_variants
+    
+    has_many :artists, through: :artist_variants
+    
     has_many :supplier_variants
+    
+    has_many :artist_variants
 
     before_create :populate_for_suppliers
+    
+    before_create :populate_for_artists
 
     private
 
@@ -13,12 +20,21 @@ module Spree
         if stock_location.supplier_id.blank? || self.suppliers.pluck(:id).include?(stock_location.supplier_id)
           stock_location.propagate_variant(self) if stock_location.propagate_all_variants?
         end
+        
+        if stock_location.artist_id.blank? || self.artists.pluck(:id).include?(stock_location.artist_id)
+          stock_location.propagate_variant(self) if stock_location.propagate_all_variants?
+        end
+        
       end
     end
 
     def populate_for_suppliers
       self.suppliers = self.product.suppliers
     end
-
+    
+    def populate_for_artists
+      self.artists = self.product.artists
+    end
+    
   end
 end
