@@ -15,7 +15,6 @@ en:
               invalid: is invalid. Please be sure to include include 'http://'
               not_responding: 'is invalid, not responding or redirecting to another location'
               
-  activerecord:
     attributes:
       spree/artist:
         commission_flat_rate: Commission Flat Rate
