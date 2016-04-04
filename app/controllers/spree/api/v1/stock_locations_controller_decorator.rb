@@ -28,5 +28,4 @@ Spree::Api::V1::StockLocationsController.class_eval do
     params[:q][:artist_id_eq] = spree_current_user.artist_id
   end
 
-
 end

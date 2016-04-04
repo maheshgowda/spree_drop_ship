@@ -8,13 +8,4 @@
         <%= f.collection_select(:supplier_id, Spree::Supplier.all, :id, :name, { :include_blank => 'None' }, { :class => 'select2' }) %>
         <%= f.error_message_on :supplier %>
       <% end %>
-      
-      
-    <div class='form-group'>
-      <%= f.field_container :artist do %>
-        <%= f.label :artist_id, Spree.t(:artist) %>
-        <%= f.collection_select(:artist_id, Spree::Artist.all, :id, :name, { :include_blank => 'None' }, { :class => 'select2' }) %>
-        <%= f.error_message_on :artist %>
-      <% end %>
-    </div>
 <% end %>
