@@ -1,4 +1,4 @@
-class ProductBelongsToArtist < ActiveRecord::Migration
+class ProductBelongsToSpreeArtist < ActiveRecord::Migration
   def change
     add_column :spree_products, :artist_id, :integer
     add_index :spree_products, :artist_id

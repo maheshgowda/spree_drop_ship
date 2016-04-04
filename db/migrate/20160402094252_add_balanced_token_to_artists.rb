@@ -1,4 +1,4 @@
-class AddBalancedTokenToArtists < ActiveRecord::Migration
+class AddBalancedTokenToSpreeArtists < ActiveRecord::Migration
   def change
     add_column :spree_artists, :tax_id, :string
     add_column :spree_artists, :token, :string
