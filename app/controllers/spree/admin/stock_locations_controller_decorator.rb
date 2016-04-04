@@ -17,6 +17,6 @@ Spree::Admin::StockLocationsController.class_eval do
       @object.artist = try_spree_current_user.artist
       @object.save
     end
-  end
+   end
 
 end

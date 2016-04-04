@@ -2,6 +2,7 @@ Spree::Api::V1::StockLocationsController.class_eval do
 
   before_filter :supplier_locations, only: [:index]
   before_filter :supplier_transfers, only: [:index]
+  
   before_filter :artist_locations, only: [:index]
   before_filter :artist_transfers, only: [:index]
 

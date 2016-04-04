@@ -63,7 +63,7 @@
         <th><%= sort_link @search, :tax_total,  Spree::Shipment.human_attribute_name(:tax_total) %></th>
         <th><%= sort_link @search, :total,  Spree::Shipment.human_attribute_name(:final_price) %></th>
         <th><%= sort_link @search, :supplier_commission,  Spree::Shipment.human_attribute_name(:supplier_commission) %></th>
-		 <th><%= sort_link @search, :supplier_commission,  Spree::Shipment.human_attribute_name(:artist_commission) %></th>
+		    <th><%= sort_link @search, :artist_commission,  Spree::Shipment.human_attribute_name(:artist_commission) %></th>
         <th data-hook="admin_shipments_index_header_actions" class="actions"></th>
       </tr>
     </thead>

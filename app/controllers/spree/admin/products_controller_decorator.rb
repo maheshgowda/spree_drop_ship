@@ -2,6 +2,7 @@ Spree::Admin::ProductsController.class_eval do
 
   before_filter :get_suppliers, only: [:edit, :update]
   before_filter :supplier_collection, only: [:index]
+  
   before_filter :get_artists, only: [:edit, :update]
   before_filter :artist_collection, only: [:index]
 
@@ -13,7 +14,7 @@ Spree::Admin::ProductsController.class_eval do
   
    def get_artists
     @artists = Spree::Artist.order(:name)
-  end
+   end
   
 
   # Scopes the collection to the Supplier.
@@ -28,6 +29,5 @@ Spree::Admin::ProductsController.class_eval do
       @collection = @collection.joins(:artists).where('spree_artists.id = ?', try_spree_current_user.artist_id)
     end
   end
-  
   
 end

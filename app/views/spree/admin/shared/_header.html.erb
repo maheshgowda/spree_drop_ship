@@ -1,5 +1,6 @@
 <%# Override header for supplier %>
 <% admin = try_spree_current_user.try(:supplier?) || try_spree_current_user.try(:has_spree_role?, "admin") %>
+<%# Override header for supplier %>
 <% admin = try_spree_current_user.try(:artist?) || try_spree_current_user.try(:has_spree_role?, "admin") %>
 <header class="header <%= admin ? "logged-in" : "logged-out" %>">
 
