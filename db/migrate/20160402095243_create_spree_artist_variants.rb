@@ -1,4 +1,4 @@
-class CreateSpreeArtistVariants < ActiveRecord::Migration
+class CreateArtistVariants < ActiveRecord::Migration
   def change
     create_table :spree_artist_variants do |t|
       t.belongs_to :artist, index: true

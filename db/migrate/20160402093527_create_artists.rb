@@ -1,4 +1,4 @@
-class CreateSpreeArtists < ActiveRecord::Migration
+class CreateArtists < ActiveRecord::Migration
   def change
     create_table :spree_artists do |t|
       t.boolean    :active, default: false, null: false
