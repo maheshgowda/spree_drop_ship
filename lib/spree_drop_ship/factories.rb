@@ -28,42 +28,8 @@ FactoryGirl.define do
 
       order.update!
     end
-
-    factory :completed_order_for_drop_ship_with_totals do
-      state 'complete'
-
-      after(:create) do |order|
-        order.refresh_shipment_rates
-        order.update_column(:completed_at, Time.now)
-      end
-
-      factory :order_ready_for_drop_ship do
-        payment_state 'paid'
-        shipment_state 'ready'
-
-        after(:create) do |order|
-          create(:payment, amount: order.total, order: order, state: 'completed')
-          order.shipments.each do |shipment|
-            shipment.inventory_units.each { |u| u.update_column('state', 'on_hand') }
-            shipment.update_column('state', 'ready')
-          end
-          order.reload
-        end
-
-        factory :shipped_order_for_drop_ship do
-          after(:create) do |order|
-            order.shipments.each do |shipment|
-              shipment.inventory_units.each { |u| u.update_column('state', 'shipped') }
-              shipment.update_column('state', 'shipped')
-            end
-            order.reload
-          end
-        end
-      end
-    end
-  end
-  
-  after(:create) do |order, evaluator|
+    
+    after(:create) do |order, evaluator|
       artist = create(:artist)
       product = create(:product)
       product.add_artist! artist
@@ -78,7 +44,7 @@ FactoryGirl.define do
       )
       order.line_items.reload
 
-      create(:shipment, order: order, stock_location: artist.stock_locations.first)
+      create(:shipment, order: order, stock_location: supplier.stock_locations.first)
       order.shipments.reload
 
       order.update!
@@ -117,7 +83,7 @@ FactoryGirl.define do
       end
     end
   end
-  
+
   factory :supplier, :class => Spree::Supplier do
     sequence(:name) { |i| "Big Store #{i}" }
     email { FFaker::Internet.email }
@@ -151,7 +117,6 @@ FactoryGirl.define do
       commission_percentage 10
     end
   end
-  
 
   factory :supplier_user, parent: :user do
     supplier

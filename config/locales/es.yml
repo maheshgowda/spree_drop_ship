@@ -5,6 +5,7 @@ es:
   new_bank_account: "Nueva cuenta bancaria"
   spree: 
     supplier_signup: "Registro de proveedores"
+    artist_signup: "Registro de proveedores"
     name: "Nombre de la marca o la empresa"
     password: "Contraseña"
     password_confirmation: "Contraseña (otra vez)"
@@ -20,6 +21,7 @@ es:
     signup: "Enviar"
     save: "Guardar"
     supplier_since: "Miembro desde hace"
+    artist_since: "Miembro desde hace"
     seconds_ago: "segundos"
     minutes_ago: "minutos"
     hours_ago: "horas" 
